@@ -1,7 +1,8 @@
 import Vue from "vue";
 
 import ASScroll from "@ashthornton/asscroll";
-import { gsap, ScrollTrigger } from "gsap/all";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 

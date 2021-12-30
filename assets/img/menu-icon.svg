@@ -1,0 +1,20 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 88.65217 30.34783">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 12px;
+        fill: #fff;
+        font-family: Syne-ExtraBold, Syne;
+        font-weight: 800;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(16.46217 18.60011)">menu</text>
+  <ellipse class="cls-2" cx="44.32609" cy="15.17391" rx="43.82609" ry="14.67391"/>
+</svg>

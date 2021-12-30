@@ -1,0 +1,108 @@
+html {
+    overflow: hidden;
+}
+body {
+    background-color: $black;
+    font-family: "Syne", sans-serif;
+    font-weight: 350;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.relative {
+    position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 730;
+}
+
+h1 {
+    font-size: 5.5rem;
+}
+.header {
+    font-size: 5.5rem;
+    font-weight: 730;
+    margin-bottom: 0rem;
+    line-height: 1.2;
+}
+h2 {
+    font-size: 2.8rem;
+}
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.4;
+}
+p {
+    margin-bottom: 2rem;
+}
+.inline-block {
+    display: inline-block;
+}
+.center {
+    text-align: center;
+}
+.space-top-1 {
+    margin-top: 1rem;
+}
+.space-top-2 {
+    margin-top: 2rem;
+}
+.space-top-3 {
+    margin-top: 3rem;
+}
+.space-top-4 {
+    margin-top: 4rem;
+}
+.space-top-5 {
+    margin-top: 5rem;
+}
+.space-top-10 {
+    margin-top: 10rem;
+}
+.space-top-15 {
+    margin-top: 15rem;
+}
+.space-bottom-2 {
+    margin-bottom: 3rem;
+}
+.fullheight {
+    height: 100vh;
+    width: 100vw;
+}
+.special {
+    font-family: "Syne Tactile", cursive;
+}
+
+.standard-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+.flex-1 {
+    flex: 1;
+}
+.outline {
+    text-shadow: 0 0 2px $theme-color, 0 0 2px $theme-color, 0 0 2px $theme-color, 0 0 2px $theme-color;
+    color: $black !important;
+}
+.animate-title {
+    transform: translate3d(0px, 110%, -90px) scale3d(1, 1, 1) rotateX(-92deg) rotateY(0deg) rotateZ(0deg)
+        skew(3deg, -12deg);
+    transform-origin: 50% 0%;
+    transform-style: preserve-3d;
+    position: relative;
+    opacity:0
+}
+.animate-text{
+    transform: translateY(80px);
+    position:relative;
+    opacity:0
+}

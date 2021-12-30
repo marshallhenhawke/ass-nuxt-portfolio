@@ -14,7 +14,13 @@ export default {
         content: "Official Nuxt.js starter for CodeSandBox"
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "true" },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap' },
+    ],
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -24,14 +30,22 @@ export default {
    ** Nuxt.js modules
    ** Doc: https://modules.nuxtjs.org
    */
-  modules: [],
+  modules: [
+    // https://go.nuxtjs.dev/bootstrap
+    '@nuxtjs/style-resources'
+  ],
 
   /*
    ** Global CSS
    ** Doc: https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-css
    */
-  css: [],
+  css: [
+    '~assets/scss/main.scss',
+  ],
 
+  styleResources: {
+    scss: ['./assets/scss/_variables.scss']
+  },
   /*
    ** Plugins to load before mounting the App
    ** Doc: https://nuxtjs.org/docs/2.x/directory-structure/plugins
@@ -41,5 +55,5 @@ export default {
       src: "~/plugins/asscroll.js",
       mode: "client"
     }
-  ]
+  ],
 };
