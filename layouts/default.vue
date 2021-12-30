@@ -101,10 +101,9 @@ export default {
             height: "0vh",
             ease: "circ.inOut",
             onComplete: () => {
-              if (this.$route.name == "index") {
-                console.log(this.$refs.therouter)
-                this.$refs.therouter.introScene();
-              }
+              
+              this.$emit('finishedIntro')
+              
             },
             onCompleteParams: this,
           },

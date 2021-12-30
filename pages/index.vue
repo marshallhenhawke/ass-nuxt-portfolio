@@ -236,6 +236,9 @@ export default {
       //  this.initSideScroller();
     });
   },
+  created(){
+    this.$parent.$on('finishedIntro', this.introScene)
+  },
   methods: {
     animateText() {
       var self = this;
