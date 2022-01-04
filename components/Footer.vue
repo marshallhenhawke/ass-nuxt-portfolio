@@ -58,6 +58,7 @@ export default {
         rotate: 360,
         ease: "none",
         repeat: -1,
+        force3d:true,
       });
       this.gsap.to(
         this.$refs.square2,
@@ -66,6 +67,7 @@ export default {
           rotate: 360,
           ease: "none",
           repeat: -1,
+            force3d:true,
         },
         0
       );

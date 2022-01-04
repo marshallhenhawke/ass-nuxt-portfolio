@@ -1,72 +1,36 @@
 <template>
   <div>
-    <div
-      id="menuContainer"
-      @click="openMenu"
-      @mouseover="menuHover"
-      @mouseleave="menuLeave"
-      class="menu-opener"
-    >
-      <img
-        ref="openArrow"
-        class="open-menu-icon"
-        src="@/assets/img/menu-icon.svg"
-      />
+    <div id="menuContainer" @click="openMenu" @mouseover="menuHover" @mouseleave="menuLeave" class="menu-opener">
+      <img ref="openArrow" class="open-menu-icon" src="@/assets/img/menu-icon.svg" />
     </div>
     <div ref="slider" class="slideout">
       <div ref="tentacleContainer" class="tentacle-container">
-        <img
-          ref="tent1"
-          class="img-fluid tent tent1 pixelated"
-          src="@/assets/img/tent1.gif"
-        />
-        <img
-          ref="tent2"
-          class="img-fluid tent tent2 pixelated"
-          src="@/assets/img/tent2.gif"
-        />
-        <img
-          ref="tent3"
-          class="img-fluid tent tent3 pixelated"
-          src="@/assets/img/tent3.gif"
-        />
+        <img ref="tent1" class="img-fluid tent tent1 pixelated" src="@/assets/img/tent1.gif" />
+        <img ref="tent2" class="img-fluid tent tent2 pixelated" src="@/assets/img/tent2.gif" />
+        <img ref="tent3" class="img-fluid tent tent3 pixelated" src="@/assets/img/tent3.gif" />
       </div>
       <div class="slideout-container">
         <div class="menu-filler">
           <div>
-            <div
-              @click="closeMenu"
-              class="hover-close-text flex flex-row align-items-center relative"
-            >
+            <div @click="closeMenu" class="hover-close-text flex flex-row align-items-center relative">
               <p ref="closeText" class="close-text"><span class="close-font">close</span></p>
-              <img
-                ref="closeArrow"
-                class="close-menu-icon"
-                src="@/assets/img/close-arrow.svg"
-              />
+              <img ref="closeArrow" class="close-menu-icon" src="@/assets/img/close-arrow.svg" />
             </div>
           </div>
         </div>
         <div class="menu-body">
-          <router-link ref="menuItem1" to="/" class="menu-text"
-            ><span class="menu-text-span">Home</span></router-link
+          <router-link ref="menuItem1" to="/" class="menu-text"><span class="menu-text-span">Home</span></router-link
           ><br />
-          <router-link ref="menuItem2" to="/" class="menu-text"
-            ><span class="menu-text-span">About</span></router-link
+          <router-link ref="menuItem2" to="/" class="menu-text"><span class="menu-text-span">About</span></router-link
           ><br />
-          <router-link ref="menuItem3" to="/" class="menu-text"
-            ><span class="menu-text-span">Work</span></router-link
+          <router-link ref="menuItem3" to="/" class="menu-text"><span class="menu-text-span">Work</span></router-link
           ><br />
-          <router-link ref="menuItem4" to="/" class="menu-text"
-            ><span class="menu-text-span">Contact</span></router-link
-          >
+          <router-link ref="menuItem4" to="/" class="menu-text"><span class="menu-text-span">Contact</span></router-link>
         </div>
         <div class="menu-footer">
           <div class="menu-footer-container">
             <a class="contact-link" href="mailto:marsh.hawke@gmail.com">
-              <span class="minimized-header menu-min-header"
-                >example@email.com</span
-              >
+              <span class="minimized-header menu-min-header">example@email.com</span>
             </a>
           </div>
           <div class="menu-footer-container">
@@ -89,17 +53,12 @@ export default {
     };
   },
   mounted() {
-     console.log("this1", this.gsap)
+    console.log("this1", this.gsap);
     this.$nextTick(() => {
       // The whole view is rendered, so I can safely access or query
       // the DOM. ¯\_(ツ)_/¯
 
-      this.menuItems = [
-        this.$refs.menuItem1,
-        this.$refs.menuItem2,
-        this.$refs.menuItem3,
-        this.$refs.menuItem4,
-      ];
+      this.menuItems = [this.$refs.menuItem1, this.$refs.menuItem2, this.$refs.menuItem3, this.$refs.menuItem4];
       console.log(this.menuItems);
       this.menuAnim = this.gsap.timeline({ paused: true });
 
@@ -126,6 +85,7 @@ export default {
         duration: 0.8,
         width: "40%",
         ease: "back.inOut(1)",
+        force3D: true,
       })
         .to(
           this.$refs.tentacleContainer,
@@ -133,8 +93,9 @@ export default {
             rotate: "0deg",
             duration: 4,
             ease: "elastic.out(1, 0.5)",
-            opacity:1,
+            opacity: 1,
             overwrite: true,
+            force3D: true,
           },
           0
         )
@@ -145,6 +106,7 @@ export default {
             y: "+=-100px",
             ease: "expo.inOut",
             duration: 0.8,
+            force3D: true,
             stagger: {
               each: 0.1,
               //amount: 0.3
@@ -156,6 +118,7 @@ export default {
           this.$refs.closeArrow,
           {
             opacity: 1,
+            force3D: true,
             x: "+=25px",
             ease: "expo.inOut",
           },
@@ -165,6 +128,7 @@ export default {
           this.$refs.closeText,
           {
             opacity: 1,
+            force3D: true,
             x: "+=25px",
             ease: "expo.inOut",
           },
@@ -175,6 +139,7 @@ export default {
           {
             opacity: 1,
             x: "+=25px",
+            force3D: true,
             ease: "expo.inOut",
             duration: 0.8,
             stagger: {
@@ -193,6 +158,7 @@ export default {
         ".menu-min-header",
         {
           opacity: 0,
+          force3D: true,
           x: "+=-25px",
           ease: "expo.out",
           duration: 0.8,
@@ -208,6 +174,7 @@ export default {
           {
             opacity: 0,
             x: "+=-25px",
+            force3D: true,
             ease: "expo.out",
           },
           0
@@ -216,6 +183,7 @@ export default {
           this.$refs.closeText,
           {
             opacity: 0,
+            force3D: true,
             x: "+=-25px",
             ease: "expo.out",
           },
@@ -225,6 +193,7 @@ export default {
           ".menu-text",
           {
             opacity: 0,
+            force3D: true,
             y: "+=100px",
             ease: "expo.inOut",
             duration: 0.8,
@@ -239,9 +208,10 @@ export default {
           this.$refs.tentacleContainer,
           {
             rotate: "90deg",
+            force3D: true,
             duration: 0.8,
             ease: "expo.in",
-            opacity:0,
+            opacity: 0,
             overwrite: true,
           },
           0
@@ -250,6 +220,7 @@ export default {
           this.$refs.slider,
           {
             duration: 0.8,
+            force3D: true,
             width: "0%",
             ease: "back.in(1)",
           },
@@ -257,7 +228,6 @@ export default {
         );
     },
     rotateTents() {
-     
       const tent1 = this.$refs.tent1;
       const tent2 = this.$refs.tent2;
       const tent3 = this.$refs.tent3;
@@ -276,7 +246,7 @@ export default {
         centerX = area.left + R;
         centerY = area.top + R;
       }
-var self=this;
+      var self = this;
       function updateTrans1(e) {
         // Calculate the distance from the mouse position to the center.
         const x = e.clientX - centerX;
@@ -314,9 +284,7 @@ var self=this;
       window.addEventListener("resize", resize1);
       resize1();
 
-      document
-        .querySelector(".slideout")
-        .addEventListener("mousemove", updateTrans1);
+      document.querySelector(".slideout").addEventListener("mousemove", updateTrans1);
     },
   },
 };
@@ -398,8 +366,8 @@ var self=this;
   opacity: 0;
   transform: translateX(-25px);
   display: inline-block;
-  z-index:101;
-  position:relative
+  z-index: 101;
+  position: relative;
 }
 .close-menu-icon:hover {
   cursor: pointer;
@@ -503,8 +471,8 @@ var self=this;
 .contact-link:hover::before {
   width: 100%;
 }
-.close-font{
-   color: $black;
+.close-font {
+  color: $black;
   font-weight: 750;
   font-family: Syne;
   line-height: 1;
@@ -515,11 +483,11 @@ var self=this;
   margin-right: 0.5rem;
   z-index: 101;
   display: inline-block;
-  position:relative
+  position: relative;
 }
-.close-font:hover{
-  font-weight:800;
-  cursor:pointer
+.close-font:hover {
+  font-weight: 800;
+  cursor: pointer;
 }
 .close-text {
   color: $black;
@@ -535,7 +503,7 @@ var self=this;
   z-index: 101;
   transform: translateX(-25px);
   display: inline-block;
-  position:relative
+  position: relative;
 }
 .close-text:hover {
   font-weight: 800;

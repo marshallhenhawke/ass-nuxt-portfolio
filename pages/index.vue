@@ -148,10 +148,12 @@
             caption="I designed and developed the front end of a website created for a paper bag manufacturer in Napanee, Ontario."
             :skills="['web design', 'web development']"
           />
-          <img ref="wine1" class="wine" src="@/assets/img/collage1.svg" />
-          <img ref="wine2" class="wine wine2" src="@/assets/img/collage2.svg" />
-          <img ref="wine3" class="wine wine3" src="@/assets/img/collage3.svg" />
-          <img ref="wine4" class="wine wine4" src="@/assets/img/collage4.svg" />
+          <div class="wine-container">
+            <img ref="wine1" class="wine" src="@/assets/img/collage1.svg" />
+            <img ref="wine2" class="wine wine2" src="@/assets/img/collage2.svg" />
+            <img ref="wine3" class="wine wine3" src="@/assets/img/collage3.svg" />
+            <img ref="wine4" class="wine wine4" src="@/assets/img/collage4.svg" />
+          </div>
         </div>
       </div>
     </div>
@@ -232,41 +234,41 @@ export default {
       this.initLoco();
       this.animateText();
       this.goBird();
-      //this.goWine();
-      //  this.initSideScroller();
+      this.goWine();
     });
   },
-  created(){
-    this.$parent.$on('finishedIntro', this.introScene)
+  created() {
+    this.$nuxt.$on("finishedIntro", this.introScene);
   },
   methods: {
     animateText() {
       var self = this;
-    
+
       this.gsap.utils.toArray(".animate-title").forEach((el) => {
-        console.log("got one", this.gsap)
+        console.log("got one", this.gsap);
         this.gsap.to(el, {
           scrollTrigger: {
             trigger: el,
-            start: "top 80%"
+            start: "top 80%",
           },
           duration: 3,
           autoAlpha: 1,
           transform: "translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
           ease: "elastic.out(1, 0.75)",
+          force3D: true,
         });
       });
       this.gsap.utils.toArray(".animate-text").forEach((el) => {
-      
         self.gsap.to(el, {
           scrollTrigger: {
             trigger: el,
-            start: "top 80%"
+            start: "top 80%",
           },
           duration: 3,
           autoAlpha: 1,
           translateY: "-=80",
           ease: "elastic.out(1, 0.75)",
+          force3D: true,
         });
       });
     },
@@ -332,21 +334,21 @@ export default {
     goWine() {
       var tl = this.gsap.timeline();
       tl.to(
-        "wine",
+        ".wine-container",
         {
-          y: "-=20",
+          y: "-=120",
           ease: "none",
         },
         0
       );
 
-      ScrollTrigger.create({
+      this.ScrollTrigger.create({
         trigger: this.$refs.wine1,
         start: "top bottom",
-        scroller: ".scrollerContainer",
         animation: tl,
         scrub: true,
         end: "bottom top",
+        force3d: true,
       });
     },
     goBird() {
@@ -360,11 +362,10 @@ export default {
         start: "top bottom",
         animation: triggerAnim,
         scrub: true,
-        end: "bottom top"
+        end: "bottom top",
       });
     },
     initLoco() {
-     
       this.ScrollTrigger.create({
         trigger: this.$refs.sliderSection1,
         start: "top bottom",
@@ -396,7 +397,7 @@ export default {
           repeat: -1,
         });
       });
-      ScrollTrigger.refresh();
+      this.ScrollTrigger.refresh();
     },
   },
 };
@@ -534,6 +535,11 @@ export default {
   left: 5rem;
   top: 100%;
   z-index: 1;
+}
+.wine-container{
+   position: absolute;
+  bottom: calc(100% + 5rem);
+  left: 60%;
 }
 .wine {
   position: absolute;

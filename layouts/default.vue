@@ -29,10 +29,8 @@ export default {
     Menu,
   },
   mounted() {
-   
     this.$nextTick(() => {
-      this.introTimeline = this.gsap.timeline(),
-      this.introAnimation();
+      (this.introTimeline = this.gsap.timeline()), this.introAnimation();
     });
   },
   methods: {
@@ -45,6 +43,7 @@ export default {
           {
             duration: 0.3,
             autoAlpha: 1,
+            force3d: true,
           },
           1
         )
@@ -55,6 +54,7 @@ export default {
             top: "0%",
             translateY: "-50%",
             ease: "circ.inOut",
+            force3d: true,
           },
           3
         )
@@ -64,6 +64,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
+            force3d: true,
           },
           3
         )
@@ -73,6 +74,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
+            force3d: true,
           },
           3
         )
@@ -82,6 +84,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
+            force3d: true,
           },
           3
         )
@@ -91,6 +94,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
+            force3d: true,
           },
           3
         )
@@ -99,11 +103,10 @@ export default {
           {
             duration: 0.7,
             height: "0vh",
+            force3d: true,
             ease: "circ.inOut",
             onComplete: () => {
-              
-              this.$emit('finishedIntro')
-              
+              this.$nuxt.$emit("finishedIntro");
             },
             onCompleteParams: this,
           },
