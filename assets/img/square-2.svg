@@ -14,9 +14,9 @@
   <g
      id="layer1"
      transform="translate(-718.27177,-286.71992)"
-     style="display:inline">
+     style="display:inline;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none">
     <rect
-       style="fill:none;stroke:#ee644c;stroke-width:9.191;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none"
+       style="fill:none;stroke:#ee644c;stroke-width:3;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect846"
        width="345.99438"
        height="345.99438"

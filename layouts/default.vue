@@ -120,7 +120,7 @@ export default {
 <style lang="scss" scoped>
 .logo {
   image-rendering: -webkit-optimize-contrast;
-  width: 12rem;
+  width: 18rem;
 }
 .logo-container {
   position: absolute;
