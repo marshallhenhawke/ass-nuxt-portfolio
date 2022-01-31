@@ -1,36 +1,75 @@
 <template>
   <div>
-    <div id="menuContainer" @click="openMenu" @mouseover="menuHover" @mouseleave="menuLeave" class="menu-opener">
-      <img ref="openArrow" class="open-menu-icon" src="@/assets/img/menu-icon.svg" />
+    <div
+      id="menuContainer"
+      @click="openMenu"
+      @mouseover="menuHover"
+      @mouseleave="menuLeave"
+      class="menu-opener relative"
+    >
+      <img class="open-menu-icon icon-decoy" src="@/assets/img/menu-icon.svg" />
+      <img
+        ref="openArrow"
+        class="open-menu-icon visible-icon"
+        src="@/assets/img/menu-icon.svg"
+      />
     </div>
     <div ref="slider" class="slideout">
       <div ref="tentacleContainer" class="tentacle-container">
-        <img ref="tent1" class="img-fluid tent tent1 pixelated" src="@/assets/img/tent1.gif" />
-        <img ref="tent2" class="img-fluid tent tent2 pixelated" src="@/assets/img/tent2.gif" />
-        <img ref="tent3" class="img-fluid tent tent3 pixelated" src="@/assets/img/tent3.gif" />
+        <img
+          ref="tent1"
+          class="img-fluid tent tent1 pixelated"
+          src="@/assets/img/tent1.gif"
+        />
+        <img
+          ref="tent2"
+          class="img-fluid tent tent2 pixelated"
+          src="@/assets/img/tent2.gif"
+        />
+        <img
+          ref="tent3"
+          class="img-fluid tent tent3 pixelated"
+          src="@/assets/img/tent3.gif"
+        />
       </div>
       <div class="slideout-container">
         <div class="menu-filler">
           <div>
-            <div @click="closeMenu" class="hover-close-text flex flex-row align-items-center relative">
-              <p ref="closeText" class="close-text"><span class="close-font">close</span></p>
-              <img ref="closeArrow" class="close-menu-icon" src="@/assets/img/close-arrow.svg" />
+            <div
+              @click="closeMenu"
+              class="hover-close-text flex flex-row align-items-center relative"
+            >
+              <p ref="closeText" class="close-text">
+                <span class="close-font">close</span>
+              </p>
+              <img
+                ref="closeArrow"
+                class="close-menu-icon"
+                src="@/assets/img/close-arrow.svg"
+              />
             </div>
           </div>
         </div>
         <div class="menu-body">
-          <router-link ref="menuItem1" to="/" class="menu-text"><span class="menu-text-span">Home</span></router-link
+          <router-link ref="menuItem1" to="/" class="menu-text"
+            ><span class="menu-text-span">Home</span></router-link
           ><br />
-          <router-link ref="menuItem2" to="/" class="menu-text"><span class="menu-text-span">About</span></router-link
+          <router-link ref="menuItem2" to="/" class="menu-text"
+            ><span class="menu-text-span">About</span></router-link
           ><br />
-          <router-link ref="menuItem3" to="/" class="menu-text"><span class="menu-text-span">Work</span></router-link
+          <router-link ref="menuItem3" to="/" class="menu-text"
+            ><span class="menu-text-span">Work</span></router-link
           ><br />
-          <router-link ref="menuItem4" to="/" class="menu-text"><span class="menu-text-span">Contact</span></router-link>
+          <router-link ref="menuItem4" to="/" class="menu-text"
+            ><span class="menu-text-span">Contact</span></router-link
+          >
         </div>
         <div class="menu-footer">
           <div class="menu-footer-container">
             <a class="contact-link" href="mailto:marsh.hawke@gmail.com">
-              <span class="minimized-header menu-min-header">example@email.com</span>
+              <span class="minimized-header menu-min-header"
+                >example@email.com</span
+              >
             </a>
           </div>
           <div class="menu-footer-container">
@@ -58,16 +97,22 @@ export default {
       // The whole view is rendered, so I can safely access or query
       // the DOM. ¯\_(ツ)_/¯
 
-      this.menuItems = [this.$refs.menuItem1, this.$refs.menuItem2, this.$refs.menuItem3, this.$refs.menuItem4];
+      this.menuItems = [
+        this.$refs.menuItem1,
+        this.$refs.menuItem2,
+        this.$refs.menuItem3,
+        this.$refs.menuItem4,
+      ];
       console.log(this.menuItems);
       this.menuAnim = this.gsap.timeline({ paused: true });
 
       this.closeWidth = this.$refs.closeText.offsetWidth;
       this.rotateTents();
       this.menuAnim.to(this.$refs.openArrow, {
-        duration: 0.6,
-        width: "6rem",
-        ease: "back.out(1.7)",
+        duration: 0.4,
+        width: "7.5rem",
+        ease:'power1.inOut',
+        rotate:10
       });
     });
   },
@@ -284,7 +329,9 @@ export default {
       window.addEventListener("resize", resize1);
       resize1();
 
-      document.querySelector(".slideout").addEventListener("mousemove", updateTrans1);
+      document
+        .querySelector(".slideout")
+        .addEventListener("mousemove", updateTrans1);
     },
   },
 };
@@ -399,7 +446,14 @@ export default {
 .open-menu-icon {
   width: 6.5rem;
   height: auto;
-  transform-origin: center center;
+  transform-origin: center;
+ 
+}
+.visible-icon{
+   position:absolute;
+  left:50%;
+  top:50%;
+  transform: translate(-50%, -50%);
 }
 .fixed-logo {
   width: 4rem;
@@ -534,6 +588,9 @@ export default {
   height: 50%;
   transform: rotate(90deg);
   transform-origin: top right;
+}
+.icon-decoy{
+  opacity:0
 }
 </style>
 

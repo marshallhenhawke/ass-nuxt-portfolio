@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :style="'background-color:' + color" class="card-image"></div>
-    <h2 class="space-top-1">{{ title }}</h2>
+    <h2 class="space-top-1-half">{{ title }}</h2>
     <p>{{ caption }}</p>
     <div>
       <span
