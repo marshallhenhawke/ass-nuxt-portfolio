@@ -47,13 +47,13 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.gsap.to(this.$refs.tric, {
+      this.$gsap.to(this.$refs.tric, {
         scrollTrigger: {
           trigger: this.$refs.tric,
           start: "top bottom",
           scrub: true,
         },
-        x: "-=900",
+        x: "-=1200",
         ease: "none",
       });
     });
@@ -76,8 +76,9 @@ export default {
 .tric {
   width: 50rem;
   position: absolute;
-  bottom: 0;
+  bottom: -2rem;
   left: 30%;
   pointer-events: none;
+  z-index:3
 }
 </style>

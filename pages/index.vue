@@ -194,23 +194,11 @@
             caption="I designed and developed the front end of a website created for a paper bag manufacturer in Napanee, Ontario."
             :skills="['web design', 'web development']"
           />
-          <div class="wine-container">
-            <img ref="wine1" class="wine" src="@/assets/img/collage1.svg" />
-            <img
-              ref="wine2"
-              class="wine wine2"
-              src="@/assets/img/collage2.svg"
-            />
-            <img
-              ref="wine3"
-              class="wine wine3"
-              src="@/assets/img/collage3.svg"
-            />
-            <img
-              ref="wine4"
-              class="wine wine4"
-              src="@/assets/img/collage4.svg"
-            />
+          <div data-speed="1.2" class="wine-container">
+            <img class="wine" src="@/assets/img/collage1.svg" />
+            <img class="wine wine2" src="@/assets/img/collage2.svg" />
+            <img class="wine wine3" src="@/assets/img/collage3.svg" />
+            <img class="wine wine4" src="@/assets/img/collage4.svg" />
           </div>
         </div>
       </div>
@@ -218,8 +206,13 @@
     <div class="container standard-padding">
       <div class="row">
         <div class="col-lg-6 d-flex">
-          <div ref="aboutStarBox">
-          <img ref="aboutStar" class="star-1" src="@/assets/img/star_1.svg" />
+          <div>
+            <img
+              data-speed="1.7"
+              ref="aboutStar"
+              class="star-1"
+              src="@/assets/img/star_1.svg"
+            />
           </div>
         </div>
         <div class="col-lg-6 d-flex align-items-center">
@@ -290,11 +283,9 @@
 </template>
 
 <script>
-import globalMixin from "~/mixins/global.js";
 import ItemCard from "@/components/ItemCard.vue";
 import Footer from "@/components/Footer.vue";
 export default {
-  mixins: [globalMixin],
   components: {
     ItemCard,
     Footer,
@@ -303,11 +294,17 @@ export default {
     return {};
   },
   mounted() {
+    console.log("how are you", this.$gsap);
+    if (this.$nuxt.context.from != undefined) {
+      this.$nextTick(() => {
+        this.introScene();
+      });
+    }
     this.$nextTick(() => {
+      this.$ScrollTrigger.refresh()
       this.initLoco();
       this.animateText();
       this.goBird();
-      this.goWine();
       this.goAboutStar();
     });
   },
@@ -316,33 +313,23 @@ export default {
   },
   methods: {
     goAboutStar() {
-      var aboutStarAnimation = this.gsap.timeline();
+      var aboutStarAnimation = this.$gsap.timeline();
       aboutStarAnimation.to(this.$refs.aboutStar, {
         autoAlpha: 1,
         rotate: 360,
         duration: 3,
       });
-      this.ScrollTrigger.create({
+      this.$ScrollTrigger.create({
         trigger: this.$refs.aboutStar,
         start: "top bottom",
         animation: aboutStarAnimation,
         force3d: true,
       });
-      this.gsap.to(this.$refs.aboutStar, {
-        scrollTrigger: {
-          trigger: this.$refs.aboutStar,
-          start: "top 130%",
-          scrub:true,
-          end:'bottom top'
-        },
-        y: "-=800",
-        ease:'none'
-      });
     },
     animateText() {
       var self = this;
-      this.gsap.utils.toArray(".fade-up-small").forEach((el) => {
-        this.gsap.to(el, {
+      this.$gsap.utils.toArray(".fade-up-small").forEach((el) => {
+        this.$gsap.to(el, {
           scrollTrigger: {
             trigger: el,
             start: "top 160%",
@@ -355,9 +342,8 @@ export default {
           force3D: true,
         });
       });
-      this.gsap.utils.toArray(".fade-up").forEach((el) => {
-        console.log("got one", this.gsap);
-        this.gsap.to(el, {
+      this.$gsap.utils.toArray(".fade-up").forEach((el) => {
+        this.$gsap.to(el, {
           scrollTrigger: {
             trigger: el,
             start: "top 90%",
@@ -370,28 +356,37 @@ export default {
           force3D: true,
         });
       });
-      this.gsap.utils.toArray(".animate-title").forEach((el) => {
-        console.log("got one", this.gsap);
-        this.gsap.to(el, {
+      this.$gsap.utils.toArray(".animate-title").forEach((title) => {
+        const childSplit = new this.$SplitText(title, {
+          type: "lines",
+          linesClass: "split-child",
+        });
+        const parentSplit = new this.$SplitText(title, {
+          linesClass: "split-parent",
+        });
+
+        this.$gsap.from(childSplit.lines, {
           scrollTrigger: {
-            trigger: el,
-            start: "top 90%",
+            trigger: title,
+            start: "top 80%",
           },
-          duration: 3,
-          autoAlpha: 1,
-          transform:
-            "translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)",
+          duration: 2,
+          yPercent: 110,
+          skewX: 9,
+          skewY: 7,
           ease: "elastic.out(1, 0.75)",
+          stagger: 0.15,
           force3D: true,
+          opacity:0
         });
       });
-      this.gsap.utils.toArray(".animate-text").forEach((el) => {
-        self.gsap.to(el, {
+      this.$gsap.utils.toArray(".animate-text").forEach((el) => {
+        self.$gsap.to(el, {
           scrollTrigger: {
             trigger: el,
             start: "top 90%",
           },
-          duration: 3,
+          duration: 2,
           autoAlpha: 1,
           translateY: "-=80",
           ease: "elastic.out(1, 0.75)",
@@ -400,7 +395,7 @@ export default {
       });
     },
     introScene() {
-      var tl = this.gsap.timeline();
+      var tl = this.$gsap.timeline();
       tl.to(this.$refs.introLine1, {
         duration: 2,
         autoAlpha: 1,
@@ -461,33 +456,14 @@ export default {
           "-=1.4"
         );
     },
-    goWine() {
-      var tl = this.gsap.timeline();
-      tl.to(
-        ".wine-container",
-        {
-          y: "-=120",
-          ease: "none",
-        },
-        0
-      );
 
-      this.ScrollTrigger.create({
-        trigger: this.$refs.wine1,
-        start: "top bottom",
-        animation: tl,
-        scrub: true,
-        end: "bottom top",
-        force3d: true,
-      });
-    },
     goBird() {
-      var triggerAnim = this.gsap.timeline();
+      var triggerAnim = this.$gsap.timeline();
       triggerAnim.to(this.$refs.bird, {
         x: "-=400",
         ease: "none",
       });
-      this.ScrollTrigger.create({
+      this.$ScrollTrigger.create({
         trigger: this.$refs.bird,
         start: "top bottom",
         animation: triggerAnim,
@@ -496,7 +472,7 @@ export default {
       });
     },
     initLoco() {
-      this.ScrollTrigger.create({
+      this.$ScrollTrigger.create({
         trigger: this.$refs.sliderSection1,
         start: "top bottom",
         onEnter: this.initSideScroller,
@@ -512,7 +488,7 @@ export default {
         const totalDistance = ticker.offsetWidth;
 
         // Position the ticker
-        this.gsap.set(ticker, { yPercent: -50 });
+        this.$gsap.set(ticker, { yPercent: -50 });
         var node = ticker.querySelector("li").cloneNode(true);
 
         // // Clone the first item and add it to the end
@@ -520,14 +496,14 @@ export default {
 
         // Get all of the items
 
-        this.gsap.to(ticker, {
-          duration: this.gsap.utils.random(10, 30),
+        this.$gsap.to(ticker, {
+          duration: this.$gsap.utils.random(10, 30),
           x: -totalDistance,
           ease: "none",
           repeat: -1,
         });
       });
-      this.ScrollTrigger.refresh();
+      this.$ScrollTrigger.refresh();
     },
   },
 };
@@ -659,7 +635,7 @@ export default {
 .star-1 {
   width: 25rem;
   opacity: 0;
-  transform: translateY(400px);
+  transform: translateY(100px);
   position: relative;
 }
 .bird {

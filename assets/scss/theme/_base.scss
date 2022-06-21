@@ -1,5 +1,5 @@
 html {
-    overflow: hidden;
+    scroll-behavior: auto !important;
 }
 body {
     background-color: $black;
@@ -7,6 +7,7 @@ body {
     font-weight: 350;
     color: white;
     font-size: 1.6rem;
+    overflow-x: hidden;
 }
 
 .relative {
@@ -24,6 +25,9 @@ h6 {
 
 h1 {
     font-size: 5.5rem;
+    .special {
+        font-size: 6.1rem;
+    }
 }
 .header {
     font-size: 5.5rem;
@@ -53,7 +57,7 @@ p {
 .space-top-1 {
     margin-top: 1rem;
 }
-.space-top-1-half{
+.space-top-1-half {
     margin-top: 1.5rem;
 }
 .space-top-2 {
@@ -102,7 +106,7 @@ p {
     transform-origin: 50% 0%;
     transform-style: preserve-3d;
     position: relative;
-    opacity:0
+    opacity: 0;
 }
 .fade-up-small {
     transform: translate3d(0px, 110%, -90px) scale3d(1, 1, 1) rotateX(-92deg) rotateY(0deg) rotateZ(0deg)
@@ -110,18 +114,39 @@ p {
     transform-origin: 50% 0%;
     transform-style: preserve-3d;
     position: relative;
-    opacity:0
+    opacity: 0;
 }
 .animate-title {
-    transform: translate3d(0px, 110%, -90px) scale3d(1, 1, 1) rotateX(-92deg) rotateY(0deg) rotateZ(0deg)
-        skew(3deg, -12deg);
     transform-origin: 50% 0%;
     transform-style: preserve-3d;
     position: relative;
-    opacity:0
 }
-.animate-text{
+.animate-text {
     transform: translateY(80px);
-    position:relative;
-    opacity:0
+    position: relative;
+    opacity: 0;
+}
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #d6d6d6 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #ffffff09;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #ffffff1f;
+    border-radius: 10px;
+    border: 5px solid #171717;
+}
+
+.split-parent {
+    overflow: hidden;
 }

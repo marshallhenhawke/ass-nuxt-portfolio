@@ -10,8 +10,9 @@
 <script>
 export default {
   props: ["text", "link"],
-  mounted() {
-    this.$nextTick(() => {
+
+  methods: {
+    mountIt() {
       var tl = this.$gsap.timeline();
       tl.to(this.$refs.containerBox, {
         duration: 1.2,
@@ -27,7 +28,7 @@ export default {
         trigger: this.$refs.containerBox,
         animation: tl,
       });
-    });
+    },
   },
 };
 </script>
@@ -67,6 +68,6 @@ export default {
 
 .thelink:hover {
   font-weight: 800;
-  transition: font-weight 300ms cubic-bezier(0.805, -0.005, 0.360, 0.995);
+  transition: font-weight 300ms cubic-bezier(0.805, -0.005, 0.36, 0.995);
 }
 </style>

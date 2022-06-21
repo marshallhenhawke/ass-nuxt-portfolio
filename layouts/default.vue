@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+    <div id="pSlide1" class="page-slider p-slider1"></div>
+    <div id="pSlide2" class="page-slider p-slider2"></div>
+    <div id="pSlide3" class="page-slider p-slider3"></div>
+    <div id="pSlide4" class="page-slider p-slider4"></div>
+    <div id="pSlide5" class="page-slider p-slider5"></div>
     <div class="intro-container">
       <div ref="logo" class="logo-container">
         <img class="logo logo-1" src="@/assets/img/logo-changer.gif" />
@@ -12,8 +17,8 @@
     </div>
     <Header />
     <Menu />
-    <div asscroll-container>
-      <div asscroll>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
         <Nuxt ref="therouter" />
       </div>
     </div>
@@ -28,14 +33,23 @@ export default {
     Header,
     Menu,
   },
+  watch: {
+    $route() {
+      this.$ScrollTrigger.refresh();
+    },
+  },
   mounted() {
+    this.$ScrollSmoother.create({
+      speed: 2,
+      effects: true,
+      normalizeScroll: true,
+      preventDefault: true,
+    });
     this.$nextTick(() => {
-      (this.introTimeline = this.gsap.timeline()), this.introAnimation();
+      (this.introTimeline = this.$gsap.timeline()), this.introAnimation();
     });
   },
   methods: {
-    enter() {},
-    leave() {},
     introAnimation() {
       this.introTimeline
         .to(
@@ -43,7 +57,7 @@ export default {
           {
             duration: 0.3,
             autoAlpha: 1,
-            force3d: true,
+            force3D: true,
           },
           1
         )
@@ -54,7 +68,7 @@ export default {
             top: "0%",
             translateY: "-50%",
             ease: "circ.inOut",
-            force3d: true,
+            force3D: true,
           },
           3
         )
@@ -64,7 +78,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
-            force3d: true,
+            force3D: true,
           },
           3
         )
@@ -74,7 +88,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
-            force3d: true,
+            force3D: true,
           },
           3
         )
@@ -84,7 +98,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
-            force3d: true,
+            force3D: true,
           },
           3
         )
@@ -94,7 +108,7 @@ export default {
             duration: 0.7,
             height: "0vh",
             ease: "circ.inOut",
-            force3d: true,
+            force3D: true,
           },
           3
         )
@@ -103,7 +117,7 @@ export default {
           {
             duration: 0.7,
             height: "0vh",
-            force3d: true,
+            force3D: true,
             ease: "circ.inOut",
             onComplete: () => {
               this.$nuxt.$emit("finishedIntro");
@@ -134,9 +148,11 @@ export default {
   width: 20vw;
   position: fixed;
   height: 100vh;
+  max-height:100vh;
   background-color: $theme-color;
   z-index: 200;
 }
+
 .slider1 {
   left: 0vw;
   top: 0;
@@ -156,5 +172,32 @@ export default {
 .slider5 {
   left: 80vw;
   top: 0;
+}
+.page-slider {
+  width: 0vw;
+  position: fixed;
+  height: 20vh;
+  background-color: $theme-color;
+  z-index: 400;
+}
+.p-slider1 {
+  left: 0vw;
+  top: 0vh;
+}
+.p-slider2 {
+  left: 0vw;
+  top: 20vh;
+}
+.p-slider3 {
+  left: 0vw;
+  top: 40vh;
+}
+.p-slider4 {
+  left: 0vw;
+  top: 60vh;
+}
+.p-slider5 {
+  left: 0vw;
+  top: 80vh;
 }
 </style>

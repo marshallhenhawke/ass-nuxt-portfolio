@@ -34,33 +34,31 @@
       </div>
       <div class="slideout-container">
         <div class="menu-filler">
-          <div>
-            <div
-              @click="closeMenu"
-              class="hover-close-text flex flex-row align-items-center relative"
-            >
-              <p ref="closeText" class="close-text">
-                <span class="close-font">close</span>
-              </p>
-              <img
-                ref="closeArrow"
-                class="close-menu-icon"
-                src="@/assets/img/close-arrow.svg"
-              />
-            </div>
+          <div
+            @click="closeMenu"
+            class="hover-close-text flex flex-row align-items-center relative"
+          >
+            <p ref="closeText" class="close-text">
+              <span class="close-font">close</span>
+            </p>
+            <img
+              ref="closeArrow"
+              class="close-menu-icon"
+              src="@/assets/img/close-arrow.svg"
+            />
           </div>
         </div>
         <div class="menu-body">
-          <router-link ref="menuItem1" to="/" class="menu-text"
+          <router-link @click.native="leaving" ref="menuItem1" to="/" class="menu-text"
             ><span class="menu-text-span">Home</span></router-link
           ><br />
-          <router-link ref="menuItem2" to="/" class="menu-text"
+          <router-link @click.native="leaving" ref="menuItem2" to="/" class="menu-text"
             ><span class="menu-text-span">About</span></router-link
           ><br />
-          <router-link ref="menuItem3" to="/" class="menu-text"
+          <router-link @click.native="leaving" ref="menuItem3" to="/" class="menu-text"
             ><span class="menu-text-span">Work</span></router-link
           ><br />
-          <router-link ref="menuItem4" to="/" class="menu-text"
+          <router-link @click.native="leaving" ref="menuItem4" to="/contact" class="menu-text"
             ><span class="menu-text-span">Contact</span></router-link
           >
         </div>
@@ -92,31 +90,30 @@ export default {
     };
   },
   mounted() {
-    console.log("this1", this.gsap);
     this.$nextTick(() => {
-      // The whole view is rendered, so I can safely access or query
-      // the DOM. ¯\_(ツ)_/¯
-
       this.menuItems = [
         this.$refs.menuItem1,
         this.$refs.menuItem2,
         this.$refs.menuItem3,
         this.$refs.menuItem4,
       ];
-      console.log(this.menuItems);
-      this.menuAnim = this.gsap.timeline({ paused: true });
+      this.menuAnim = this.$gsap.timeline({ paused: true });
 
       this.closeWidth = this.$refs.closeText.offsetWidth;
       this.rotateTents();
       this.menuAnim.to(this.$refs.openArrow, {
-        duration: 0.4,
+        duration: 0.2,
         width: "7.5rem",
-        ease:'power1.inOut',
-        rotate:10
+        ease: "power1.inOut",
+        rotate: 6,
       });
     });
   },
   methods: {
+    leaving(){
+      this.closeMenu()
+      console.log("getting leaving")
+    },
     menuHover() {
       this.menuAnim.play();
     },
@@ -125,7 +122,7 @@ export default {
     },
     openMenu() {
       this.closingMenu = false;
-      var tl = this.gsap.timeline();
+      var tl = this.$gsap.timeline();
       tl.to(this.$refs.slider, {
         duration: 0.8,
         width: "40%",
@@ -197,7 +194,7 @@ export default {
     },
     closeMenu() {
       this.closingMenu = true;
-      var tl = this.gsap.timeline();
+      var tl = this.$gsap.timeline();
 
       tl.to(
         ".menu-min-header",
@@ -306,19 +303,19 @@ export default {
         const scaledXPercent = xPercent * maxTrans;
         const scaledYPercent = yPercent * maxTrans;
 
-        self.gsap.to(tent1, {
+        self.$gsap.to(tent1, {
           skewX: scaledXPercent + 1,
           skewY: scaledYPercent,
           duration: 1.5,
           overwrite: "auto",
         });
-        self.gsap.to(tent2, {
+        self.$gsap.to(tent2, {
           skewX: scaledXPercent + 2,
           skewY: scaledYPercent + 2,
           duration: 0.2,
           overwrite: "auto",
         });
-        self.gsap.to(tent3, {
+        self.$gsap.to(tent3, {
           skewX: scaledXPercent + 5,
           skewY: scaledYPercent + 4,
           duration: 3,
@@ -345,7 +342,7 @@ export default {
 }
 .slideout {
   position: fixed;
-  z-index: 10000;
+  z-index: 300;
   background-color: $theme-color;
   width: 0%;
   top: 0;
@@ -382,11 +379,15 @@ export default {
   z-index: 101;
   color: $black;
   text-decoration: none;
+  transition: text-shadow 300ms cubic-bezier(0.945, 0, 0.04, 1);
+  transition: color 300ms cubic-bezier(0.945, 0, 0.04, 1);
 }
 .menu-text:hover {
-  color: #161316;
   text-decoration: none;
   font-weight: 800;
+  .menu-text-span {
+    
+  }
 }
 .menu-text::before {
   content: "";
@@ -416,9 +417,6 @@ export default {
   z-index: 101;
   position: relative;
 }
-.close-menu-icon:hover {
-  cursor: pointer;
-}
 .menu-body {
   flex: 2;
 }
@@ -447,12 +445,11 @@ export default {
   width: 6.5rem;
   height: auto;
   transform-origin: center;
- 
 }
-.visible-icon{
-   position:absolute;
-  left:50%;
-  top:50%;
+.visible-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 .fixed-logo {
@@ -539,10 +536,7 @@ export default {
   display: inline-block;
   position: relative;
 }
-.close-font:hover {
-  font-weight: 800;
-  cursor: pointer;
-}
+
 .close-text {
   color: $black;
   font-weight: 750;
@@ -559,9 +553,7 @@ export default {
   display: inline-block;
   position: relative;
 }
-.close-text:hover {
-  font-weight: 800;
-}
+
 .close-text::before {
   content: "";
   position: absolute;
@@ -573,12 +565,20 @@ export default {
   z-index: 100;
   transition: width 300ms cubic-bezier(0.945, 0, 0.04, 1);
 }
-.close-text:hover::before {
-  width: 140%;
-}
+
 .hover-close-text:hover {
   cursor: pointer;
   font-weight: 800;
+  .close-text {
+    font-weight: 100;
+  }
+  .close-font {
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .close-text::before {
+    width: 140%;
+  }
 }
 .tentacle-container {
   position: absolute;
@@ -589,8 +589,8 @@ export default {
   transform: rotate(90deg);
   transform-origin: top right;
 }
-.icon-decoy{
-  opacity:0
+.icon-decoy {
+  opacity: 0;
 }
 </style>
 
